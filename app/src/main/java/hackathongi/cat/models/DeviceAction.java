@@ -5,16 +5,7 @@ package hackathongi.cat.models;
  */
 
 public class DeviceAction {
-    String name;
     String description;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getDescription() {
         return description;

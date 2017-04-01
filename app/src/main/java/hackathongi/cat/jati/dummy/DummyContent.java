@@ -31,7 +31,6 @@ public class DummyContent {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
             Device device = new Device();
-            device.setName("TEST " + i );
             device.setDescription("Test " + i);
             ITEMS.add(device);
         }

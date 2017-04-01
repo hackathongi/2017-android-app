@@ -9,12 +9,12 @@ import java.util.Map;
  * Created by pgarriga on 1/4/17.
  */
 
-public class Device {
-    @SerializedName("description")
+public class DeviceActionParamater {
     String description;
 
-    @SerializedName("actions")
-    List<Map<String, DeviceAction>> actionList;
+
+    @SerializedName("parameters")
+    List<Map<String, DeviceActionParamater>> parameterList;
 
     public String getDescription() {
         return description;

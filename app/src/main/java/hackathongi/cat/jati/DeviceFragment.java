@@ -1,20 +1,33 @@
 package hackathongi.cat.jati;
 
+
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import hackathongi.cat.jati.dummy.DummyContent;
-import hackathongi.cat.jati.dummy.DummyContent.DummyItem;
 import hackathongi.cat.models.Device;
+import hackathongi.cat.tarla.TarlaService;
+import okhttp3.Interceptor;
 
+import okhttp3.Request;
+
+import okhttp3.ResponseBody;
+import retrofit.RestAdapter;
+import retrofit.android.AndroidLog;
+import retrofit.client.Response;
+
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * A fragment representing a list of Items.
@@ -29,6 +42,8 @@ public class DeviceFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    List<Device> mDeviceList = new ArrayList<Device>();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -70,7 +85,43 @@ public class DeviceFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyDeviceRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyDeviceRecyclerViewAdapter(mDeviceList, mListener));
+
+            new AsyncTask<Void, Void, Response>() {
+
+                private Exception exception = null;
+
+                @Override
+                protected Response doInBackground(Void... params) {
+                    try {
+                        RestAdapter restAdapter = new RestAdapter.Builder() // Builder
+                                .setEndpoint("http://192.168.4.250/") // Endpoint
+                                .setLogLevel( RestAdapter.LogLevel.FULL ) // Log level
+                                .setLog(new AndroidLog("retrofit")) // Log
+                                .build();
+
+                        TarlaService service = restAdapter.create(TarlaService.class);
+
+
+                        Response response = service.listDevices();;
+                        return response;
+
+                    } catch (Exception e) {
+                        this.exception = e;
+                        Log.e("Error", e.getLocalizedMessage());
+                        return null;
+                    }
+                }
+
+                @Override
+                protected void onPostExecute(Response response) {
+                    if (response != null) {
+
+                        response.getBody()
+                        //mDeviceList.addAll(deviceList);
+                    }
+                }
+            }.execute();
         }
         return view;
     }
@@ -107,4 +158,6 @@ public class DeviceFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Device item);
     }
+
+
 }

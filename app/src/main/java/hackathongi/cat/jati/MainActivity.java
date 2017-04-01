@@ -72,6 +72,6 @@ public class MainActivity extends FragmentActivity implements DeviceFragment.OnL
 
     @Override
     public void onListFragmentInteraction(Device item) {
-        Log.d("LOG", item.getName());
+        Log.d("LOG", item.getDescription());
     }
 }
