@@ -117,7 +117,7 @@ public class DeviceFragment extends Fragment {
                 protected void onPostExecute(Response response) {
                     if (response != null) {
 
-                        response.getBody()
+                        response.getBody();
                         //mDeviceList.addAll(deviceList);
                     }
                 }
