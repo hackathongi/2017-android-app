@@ -136,7 +136,7 @@ public class DetailsActivity extends AppCompatActivity {
             Toast toast;
 
             if( this.exception == null) {
-                toast = Toast.makeText(getApplicationContext(), "Visca Vidreres aka OK", Toast.LENGTH_SHORT);
+                toast = Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT);
             } else {
                 toast = Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT);
             }
