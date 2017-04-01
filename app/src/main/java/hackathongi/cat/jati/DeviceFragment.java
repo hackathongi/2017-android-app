@@ -103,7 +103,7 @@ public class DeviceFragment extends Fragment {
                         TarlaService service = restAdapter.create(TarlaService.class);
 
 
-                        Response response = service.listDevices();;
+                        Response response = service.listDevices();
                         return response;
 
                     } catch (Exception e) {
@@ -117,7 +117,6 @@ public class DeviceFragment extends Fragment {
                 protected void onPostExecute(Response response) {
                     if (response != null) {
 
-                        response.getBody()
                         //mDeviceList.addAll(deviceList);
                     }
                 }

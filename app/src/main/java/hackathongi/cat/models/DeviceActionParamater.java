@@ -1,20 +1,15 @@
 package hackathongi.cat.models;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by pgarriga on 1/4/17.
  */
 
 public class DeviceActionParamater {
+    String name;
     String description;
-
-
-    @SerializedName("parameters")
-    List<Map<String, DeviceActionParamater>> parameterList;
+    List<DeviceAction> paramaterList;
 
     public String getDescription() {
         return description;

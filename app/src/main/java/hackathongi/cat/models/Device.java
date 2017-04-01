@@ -10,11 +10,9 @@ import java.util.Map;
  */
 
 public class Device {
-    @SerializedName("description")
+    String name;
     String description;
-
-    @SerializedName("actions")
-    List<Map<String, DeviceAction>> actionList;
+    List<DeviceAction> actionList;
 
     public String getDescription() {
         return description;
