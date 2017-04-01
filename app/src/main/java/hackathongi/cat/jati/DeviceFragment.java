@@ -102,7 +102,7 @@ public class DeviceFragment extends Fragment {
             mDeviceList.add(deviceCatapult);
 
             // WATERING
-            DeviceAction deviceWateringAction1 = new DeviceAction("on", "Turn on");
+            DeviceAction deviceWateringAction1 = new DeviceAction("regar", "Turn on");
             DeviceAction deviceWateringAction2 = new DeviceAction("off", "Turn off");
             DeviceAction deviceWateringAction3 = new DeviceAction("status", "Will return the humidity and temperature status");
 
