@@ -9,10 +9,29 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+
+import java.util.ArrayList;
+import java.util.Locale;
+
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import hackathongi.cat.models.Device;
 
 public class MainActivity extends FragmentActivity implements DeviceFragment.OnListFragmentInteractionListener,
         VoiceFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
+
+    private TextView txtSpeechInput;
+    private ImageButton btnSpeak;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
