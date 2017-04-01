@@ -30,9 +30,9 @@ public class DummyContent {
     static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
-            Device device = new Device();
-            device.setDescription("Test " + i);
-            ITEMS.add(device);
+            //Device device = new Device();
+            // device.setDescription("Test " + i);
+           // ITEMS.add(device);
         }
     }
 

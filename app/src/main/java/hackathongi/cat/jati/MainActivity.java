@@ -1,5 +1,6 @@
 package hackathongi.cat.jati;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -69,6 +70,10 @@ public class MainActivity extends FragmentActivity implements DeviceFragment.OnL
 
     @Override
     public void onListFragmentInteraction(Device item) {
-        Log.d("LOG", item.getDescription());
+        Intent i = new Intent(this, DetailsActivity.class);
+        i.putExtra("Device", item);
+        startActivity(i);
+
+        Log.d("LOG", item.getName() + " | " + item.getDescription());
     }
 }

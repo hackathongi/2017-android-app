@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import hackathongi.cat.models.Device;
+import hackathongi.cat.models.DeviceAction;
+import hackathongi.cat.models.DeviceActionParamater;
 import hackathongi.cat.tarla.TarlaService;
 import okhttp3.Interceptor;
 
@@ -85,6 +87,20 @@ public class DeviceFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
+
+            // CODI D'EXEMPLE
+
+            DeviceActionParamater deviceActionParamater = new DeviceActionParamater("sec", "Delay until catapult shots");
+
+            DeviceAction deviceAction = new DeviceAction("shot", "Shot the catapult");
+            deviceAction.addParameter(deviceActionParamater);
+
+            Device device = new Device("Catapult", "A catapult to kill intruders." );
+            device.addAction(deviceAction);
+
+            mDeviceList.add(device);
+
             recyclerView.setAdapter(new MyDeviceRecyclerViewAdapter(mDeviceList, mListener));
 
             new AsyncTask<Void, Void, Response>() {

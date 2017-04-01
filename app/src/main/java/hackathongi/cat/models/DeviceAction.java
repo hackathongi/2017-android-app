@@ -1,5 +1,6 @@
 package hackathongi.cat.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by pgarriga on 1/4/17.
  */
 
-public class DeviceAction {
+public class DeviceAction implements Serializable {
     String name;
     String description;
 
@@ -19,4 +20,13 @@ public class DeviceAction {
 
         this.parameterList = new ArrayList<>();
     }
+
+    public void addParameter(DeviceActionParamater deviceActionParamater){
+        this.parameterList.add(deviceActionParamater);
+    }
+
+    public String getName() {
+        return name;
+    }
+
 }
