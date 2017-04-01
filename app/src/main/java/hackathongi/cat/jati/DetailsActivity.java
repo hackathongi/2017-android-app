@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -111,12 +112,16 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected Response doInBackground(Void... params) {
+            Response response;
+
             try {
                 RestAdapter restAdapter = providesRestAdapter();
 
                 TarlaService service = restAdapter.create(TarlaService.class);
 
-                return service.action(device, action);
+                response = service.action(device, action);
+
+                return response;
 
             } catch (Exception e) {
                 this.exception = e;
@@ -128,6 +133,15 @@ public class DetailsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Response response) {
+            Toast toast;
+
+            if( this.exception == null) {
+                toast = Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_SHORT);
+            } else {
+                toast = Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT);
+            }
+            toast.show();
+
         }
 
         public RestAdapter providesRestAdapter() {
