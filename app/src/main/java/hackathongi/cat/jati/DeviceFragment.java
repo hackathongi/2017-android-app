@@ -134,10 +134,13 @@ public class DeviceFragment extends Fragment {
             DeviceActionParamater deviceBombetaAction1Parameter = new DeviceActionParamater("p1", "on / off");
 
             DeviceAction deviceBombetaAction1 = new DeviceAction("on", "Say a text using text-to-speech synthesis");
+            DeviceAction deviceBombetaAction2 = new DeviceAction("off", "Say a text using text-to-speech synthesis");
             deviceBombetaAction1.addParameter(deviceBombetaAction1Parameter);
+            deviceBombetaAction2.addParameter(deviceBombetaAction1Parameter);
 
             Device deviceBombeta = new Device("bombeta", "Llum de la casa" );
             deviceBombeta.addAction(deviceBombetaAction1);
+            deviceBombeta.addAction(deviceBombetaAction2);
 
             mDeviceList.add(deviceBombeta);
 
