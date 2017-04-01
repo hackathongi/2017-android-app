@@ -1,16 +1,15 @@
 package hackathongi.cat.models;
 
-import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by pgarriga on 1/4/17.
  */
 
-public class Device {
+public class Device implements Serializable{
     String name;
     String description;
     List<DeviceAction> actionList;
@@ -20,5 +19,21 @@ public class Device {
         this.description = description;
 
         this.actionList = new ArrayList<>();
+    }
+
+    public void addAction(DeviceAction deviceAction){
+        this.actionList.add(deviceAction);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public List<DeviceAction> getActionList() {
+        return actionList;
     }
 }

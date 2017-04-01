@@ -12,10 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.google.gson.Gson;
-
 import hackathongi.cat.models.Device;
+import hackathongi.cat.models.DeviceAction;
+import hackathongi.cat.models.DeviceActionParamater;
 import hackathongi.cat.tarla.TarlaService;
 import okhttp3.Interceptor;
 
@@ -30,8 +29,6 @@ import retrofit.client.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.lang.String;
-import org.json.JSONObject;
 
 
 /**
@@ -90,6 +87,86 @@ public class DeviceFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+
+
+            // CODI D'EXEMPLE
+            // CATAPULT
+            DeviceActionParamater deviceCatapultAction1Parameter = new DeviceActionParamater("sec", "Delay until catapult shots");
+
+            DeviceAction deviceCatapultAction1 = new DeviceAction("shot", "Shot the catapult");
+            deviceCatapultAction1.addParameter(deviceCatapultAction1Parameter);
+
+            Device deviceCatapult = new Device("catapult", "A catapult to kill intruders." );
+            deviceCatapult.addAction(deviceCatapultAction1);
+
+            mDeviceList.add(deviceCatapult);
+
+            // WATERING
+            DeviceAction deviceWateringAction1 = new DeviceAction("on", "Turn on");
+            DeviceAction deviceWateringAction2 = new DeviceAction("off", "Turn off");
+            DeviceAction deviceWateringAction3 = new DeviceAction("status", "Will return the humidity and temperature status");
+
+            Device deviceWatering = new Device("watering", "Watering for plant maintenance." );
+            deviceWatering.addAction(deviceWateringAction1);
+            deviceWatering.addAction(deviceWateringAction2);
+            deviceWatering.addAction(deviceWateringAction3);
+
+            mDeviceList.add(deviceWatering);
+
+            // CAMERA
+            DeviceActionParamater deviceCameraAction4Parameter = new DeviceActionParamater("num", "For the pic cmd, the number of pictures to be returned (1 if not set)");
+
+            DeviceAction deviceCameraAction1 = new DeviceAction("on", "Turn on");
+            DeviceAction deviceCameraAction2 = new DeviceAction("off", "Turn off");
+            DeviceAction deviceCameraAction3 = new DeviceAction("status", "Whether it is on or off");
+            DeviceAction deviceCameraAction4 = new DeviceAction("pic", "Return last n pictures (1 by default)");
+            deviceCameraAction4.addParameter(deviceCameraAction4Parameter);
+
+            Device deviceCamera = new Device("camera", "Surveillance camera" );
+            deviceCamera.addAction(deviceCameraAction1);
+            deviceCamera.addAction(deviceCameraAction2);
+            deviceCamera.addAction(deviceCameraAction3);
+            deviceCamera.addAction(deviceCameraAction4);
+
+            mDeviceList.add(deviceCamera);
+
+            // BOMBETA
+            DeviceActionParamater deviceBombetaAction1Parameter = new DeviceActionParamater("p1", "on / off");
+
+            DeviceAction deviceBombetaAction1 = new DeviceAction("on", "Say a text using text-to-speech synthesis");
+            deviceBombetaAction1.addParameter(deviceBombetaAction1Parameter);
+
+            Device deviceBombeta = new Device("bombeta", "Llum de la casa" );
+            deviceBombeta.addAction(deviceBombetaAction1);
+
+            mDeviceList.add(deviceBombeta);
+
+            // ANNOUNCER
+            DeviceActionParamater deviceAnnouncerAction1Parameter = new DeviceActionParamater("what", "What to say");
+            DeviceActionParamater deviceAnnouncerAction2Parameter = new DeviceActionParamater("voice", "Change voice/langauge. Default: spanish");
+            DeviceActionParamater deviceAnnouncerAction3Parameter = new DeviceActionParamater("volume", "Change volume of sound. Default: 100");
+            DeviceActionParamater deviceAnnouncerAction4Parameter = new DeviceActionParamater("speed", "Set speed, in words/minute. Default: 175");
+
+            DeviceAction deviceAnnouncerAction1 = new DeviceAction("say", "Say a text using text-to-speech synthesis");
+            deviceAnnouncerAction1.addParameter(deviceAnnouncerAction1Parameter);
+            deviceAnnouncerAction1.addParameter(deviceAnnouncerAction2Parameter);
+            deviceAnnouncerAction1.addParameter(deviceAnnouncerAction3Parameter);
+            deviceAnnouncerAction1.addParameter(deviceAnnouncerAction4Parameter);
+
+            Device deviceAnnouncer = new Device("announcer", "Announce things to people in the house" );
+            deviceAnnouncer.addAction(deviceAnnouncerAction1);
+
+            mDeviceList.add(deviceAnnouncer);
+
+
+            // FACIAL
+            DeviceAction deviceFacialAction1 = new DeviceAction("on", "Start the facial recognition process.");
+
+            Device deviceFacial = new Device("facial", "Facial recognition" );
+            deviceFacial.addAction(deviceFacialAction1);
+
+            mDeviceList.add(deviceFacial);
+
             recyclerView.setAdapter(new MyDeviceRecyclerViewAdapter(mDeviceList, mListener));
 
             new AsyncTask<Void, Void, Response>() {
@@ -107,8 +184,7 @@ public class DeviceFragment extends Fragment {
 
                         TarlaService service = restAdapter.create(TarlaService.class);
 
-
-                        Response response = service.listDevices();
+                        Response response = service.listDevices();;
                         return response;
 
                     } catch (Exception e) {

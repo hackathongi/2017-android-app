@@ -6,6 +6,7 @@ import java.util.Map;
 import hackathongi.cat.models.Device;
 import retrofit.client.Response;
 import retrofit.http.GET;
+import retrofit.http.Path;
 
 
 /**
@@ -14,4 +15,7 @@ import retrofit.http.GET;
 public interface TarlaService {
     @GET("/devices")
     Response listDevices();
+
+    @GET("/devices/{device}/cmds/{action}")
+    Response action(@Path("device") String device, @Path("action") String action);
 }

@@ -6,4 +6,7 @@
     <color name="white">#ffffff</color>
     <color name="bg_gradient_start">#31244e</color>
     <color name="bg_gradient_end">#01A9DB</color>
+
+    <color name="black_overlay">#01A9DB</color>
+
 </resources>
