@@ -1,6 +1,7 @@
 package hackathongi.cat.jati;
 
 import android.annotation.SuppressLint;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,11 +16,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import hackathongi.cat.models.Device;
 import hackathongi.cat.models.DeviceAction;
+import hackathongi.cat.tarla.TarlaService;
+import okhttp3.OkHttpClient;
+import retrofit.RestAdapter;
+import retrofit.android.AndroidLog;
+
+import retrofit.client.OkClient;
+import retrofit.client.Response;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -73,6 +84,8 @@ public class DetailsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
                 Log.d("PERE", mDevice.getActionList().get(position).getName());
+
+                new DoActionTask(mDevice.getName(), mDevice.getActionList().get(position).getName()).execute();
             }
         });
 
@@ -84,4 +97,51 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
     }
+
+
+    private class DoActionTask extends AsyncTask<Void, Void, Response> {
+
+        private String device, action;
+        private Exception exception = null;
+
+        DoActionTask(String device, String action) {
+            this.device = device;
+            this.action = action;
+        }
+
+        @Override
+        protected Response doInBackground(Void... params) {
+            try {
+                RestAdapter restAdapter = providesRestAdapter();
+
+                TarlaService service = restAdapter.create(TarlaService.class);
+
+                return service.action(device, action);
+
+            } catch (Exception e) {
+                this.exception = e;
+                Log.e("Error", e.getLocalizedMessage());
+
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Response response) {
+        }
+
+        public RestAdapter providesRestAdapter() {
+            //final OkHttpClient okHttpClient = new OkHttpClient();
+            //okHttpClient.setReadTimeout(60, TimeUnit.SECONDS);
+            //okHttpClient.setConnectTimeout(60, TimeUnit.SECONDS);
+
+            return new RestAdapter.Builder()
+                    .setEndpoint("http://192.168.4.250/") // Endpoint
+                    //.setClient(okHttpClient)
+                    .setLogLevel( RestAdapter.LogLevel.FULL ) // Log level
+                    .setLog(new AndroidLog("retrofit")) // Log
+                    .build();
+        }
+    }
+
 }
