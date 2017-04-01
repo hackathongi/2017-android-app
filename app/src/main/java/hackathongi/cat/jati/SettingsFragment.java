@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 
 /**
@@ -60,11 +63,25 @@ public class SettingsFragment extends Fragment {
         }
     }
 
+    public WebView mWebView;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
+
+
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        mWebView = (WebView) view.findViewById(R.id.webview);
+        mWebView.loadUrl("http://www.vidreres.cat");
+
+        // Enable Javascript
+        WebSettings webSettings = mWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        // Force links and redirects to open in the WebView instead of in a browser
+        mWebView.setWebViewClient(new WebViewClient());
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
