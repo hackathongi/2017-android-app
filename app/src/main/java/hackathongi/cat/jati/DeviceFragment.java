@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
+
 import hackathongi.cat.models.Device;
 import hackathongi.cat.tarla.TarlaService;
 import okhttp3.Interceptor;
@@ -27,6 +30,8 @@ import retrofit.client.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.String;
+import org.json.JSONObject;
 
 
 /**
@@ -103,7 +108,7 @@ public class DeviceFragment extends Fragment {
                         TarlaService service = restAdapter.create(TarlaService.class);
 
 
-                        Response response = service.listDevices();;
+                        Response response = service.listDevices();
                         return response;
 
                     } catch (Exception e) {
