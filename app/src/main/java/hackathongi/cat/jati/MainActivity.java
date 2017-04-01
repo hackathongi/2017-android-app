@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import hackathongi.cat.models.Device;
 
-public class MainActivity extends FragmentActivity implements DeviceFragment.OnListFragmentInteractionListener{
+public class MainActivity extends FragmentActivity implements DeviceFragment.OnListFragmentInteractionListener,
+        VoiceFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -22,13 +23,24 @@ public class MainActivity extends FragmentActivity implements DeviceFragment.OnL
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    //mTextMessage.setText(R.string.title_home);
+                    DeviceFragment deviceFragment = new DeviceFragment();
+
+                    // add fragment to the fragment container layout
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content, deviceFragment).commit();
                     return true;
+
                 case R.id.navigation_dashboard:
-                    //mTextMessage.setText(R.string.title_dashboard);
+                    VoiceFragment voiceFragment = new VoiceFragment();
+
+                    // add fragment to the fragment container layout
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content, voiceFragment).commit();
                     return true;
+
                 case R.id.navigation_notifications:
-                    //mTextMessage.setText(R.string.title_notifications);
+                    SettingsFragment settingsFragment = new SettingsFragment();
+
+                    // add fragment to the fragment container layout
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content, settingsFragment).commit();
                     return true;
             }
             return false;
@@ -51,6 +63,11 @@ public class MainActivity extends FragmentActivity implements DeviceFragment.OnL
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     @Override

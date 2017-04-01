@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">JATI</string>
     <string name="title_home">Devices</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_dashboard">Voice</string>
+    <string name="title_notifications">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
