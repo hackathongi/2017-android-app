@@ -1,17 +1,22 @@
 package hackathongi.cat.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by pgarriga on 1/4/17.
  */
 
 public class DeviceAction {
+    String name;
     String description;
 
-    public String getDescription() {
-        return description;
-    }
+    List<DeviceActionParamater> parameterList;
 
-    public void setDescription(String description) {
+    public DeviceAction(String name, String description) {
+        this.name = name;
         this.description = description;
+
+        this.parameterList = new ArrayList<>();
     }
 }

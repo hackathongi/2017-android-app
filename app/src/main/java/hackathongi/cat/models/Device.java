@@ -2,6 +2,7 @@ package hackathongi.cat.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +15,10 @@ public class Device {
     String description;
     List<DeviceAction> actionList;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+    public Device(String name, String description) {
+        this.name = name;
         this.description = description;
+
+        this.actionList = new ArrayList<>();
     }
 }
