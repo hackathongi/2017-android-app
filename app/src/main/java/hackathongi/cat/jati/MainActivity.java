@@ -123,8 +123,8 @@ public class MainActivity extends FragmentActivity implements DeviceFragment.OnL
     /**
      * Receiving speech input
      * */
-    //@Override
-    protected void onActivityResult22(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
@@ -148,8 +148,8 @@ public class MainActivity extends FragmentActivity implements DeviceFragment.OnL
         return true;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    //@Override
+    protected void onActivityResult22(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
