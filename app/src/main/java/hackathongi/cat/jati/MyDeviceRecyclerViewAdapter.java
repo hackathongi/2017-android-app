@@ -37,7 +37,10 @@ public class MyDeviceRecyclerViewAdapter extends RecyclerView.Adapter<MyDeviceRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getName());
+        String text = mValues.get(position).getName();
+        String name = text.substring(0, 1).toUpperCase() + text.substring(1);
+        //holder.mIdView.setText(mValues.get(position).getName());
+        holder.mIdView.setText(name);
         holder.mContentView.setText(mValues.get(position).getDescription());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

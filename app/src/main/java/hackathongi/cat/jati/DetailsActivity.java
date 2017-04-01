@@ -84,13 +84,17 @@ public class DetailsActivity extends AppCompatActivity {
             // argument position gives the index of item which is clicked
             public void onItemClick(AdapterView<?> arg0, View v,int position, long arg3)
             {
-                Log.d("PERE", mDevice.getActionList().get(position).getName());
+                //Log.d("PERE", mDevice.getActionList().get(position).getName());
 
                 new DoActionTask(mDevice.getName(), mDevice.getActionList().get(position).getName()).execute();
             }
         });
 
-        ((TextView) findViewById(R.id.name)).setText(mDevice.getName());
+        String text = mDevice.getName();
+        String name = text.substring(0, 1).toUpperCase() + text.substring(1);
+
+        //0((TextView) findViewById(R.id.name)).setText(mDevice.getName());
+        ((TextView) findViewById(R.id.name)).setText(name);
         ((TextView) findViewById(R.id.description)).setText(mDevice.getDescription());
     }
 
